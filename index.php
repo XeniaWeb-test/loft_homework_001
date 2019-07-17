@@ -145,7 +145,7 @@ $cars = [
 echo ("<pre>");
 foreach ($cars as $car => $value) {
     echo 'Car: ' . $car . PHP_EOL;
-    echo  $value['model'] . ' - ' . $value['speed'] . ' - ' . $value['doors'] . ' - ' . $value['year'] . PHP_EOL . PHP_EOL;
+    echo implode(" - ", $value) . PHP_EOL . PHP_EOL;
 }
 echo ("</pre>");
 
@@ -166,20 +166,22 @@ $cellStyle = 'td{padding:8px;border:1px solid darkred;text-align: center}';
 $style = "<style>" . $tableStyle . $cellStyle . "</style>";
 $caption = '<caption style="text-align:right;color:darkred;">Таблица умножения</caption>';
 
-$table = '<table>' . $style;
+echo '<table>' . $style;
 
 for ($tr = 1; $tr <= $rows; $tr++) {
-    $table .= '<tr>';
+    echo '<tr>';
     for ($td = 1; $td <= $cols; $td++) {
-        if($tr % 2 == 0 && $td % 2 == 0) {
-            $table .= '<td style="color:#804eff;">( ' . $tr * $td . ' )</td>';
-        } elseif ($tr % 2 == 1 && $td % 2 == 1) {
-            $table .= '<td style="color:#ff6154;">[ ' . $tr * $td . ' ]</td>';
+        if(($tr+$td) % 2 == 0) {
+            if ($td % 2 == 0) {
+                echo '<td style="color:#804eff;">( ' . $tr * $td . ' )</td>';
+            } else {
+                echo '<td style="color:#ff6154;">[ ' . $tr * $td . ' ]</td>';
+            }
         } else {
-            $table .= '<td>' . $tr * $td . '</td>';
+            echo '<td>' . $tr * $td . '</td>';
         }
     }
-    $table .= '</tr>';
+    echo '</tr>';
 }
-$table .= $caption . '</table>';
-echo $table;
+
+echo $caption . '</table>';
